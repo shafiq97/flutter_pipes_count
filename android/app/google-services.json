@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "598003715856",
+    "project_id": "pipe-count-b6505",
+    "storage_bucket": "pipe-count-b6505.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:598003715856:android:0667822068e66c22c9df95",
+        "android_client_info": {
+          "package_name": "com.example.pipe_counter_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9iOtsYXQPMyvxyD4YuOZssEQrB99fRhM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

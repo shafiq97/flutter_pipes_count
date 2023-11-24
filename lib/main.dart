@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -23,7 +24,7 @@ class ImagePickerScreen extends StatefulWidget {
 
 class _ImagePickerScreenState extends State<ImagePickerScreen> {
   XFile? _image;
-  List? _recognitions;
+  int? _recognitions;
 
   @override
   void initState() {
@@ -47,8 +48,8 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
     }
   }
 
-  Future<List?> uploadImage(File imageFile) async {
-    var uri = Uri.parse('http://<your-server-ip>:5000/detect_pipes');
+  Future<int?> uploadImage(File imageFile) async {
+    var uri = Uri.parse('http://192.168.1.10:5000/detect_pipes');
     var request = http.MultipartRequest('POST', uri)
       ..files.add(await http.MultipartFile.fromPath('file', imageFile.path));
     var response = await request.send();
@@ -56,10 +57,11 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
     if (response.statusCode == 200) {
       var responseData = await response.stream.toBytes();
       var responseString = String.fromCharCodes(responseData);
+      log(responseString);
       return jsonDecode(responseString);
     } else {
       // Handle error...
-      print('Failed to upload image: ${response.statusCode}');
+      log('Failed to upload image: ${response.statusCode}');
       return null;
     }
   }
@@ -77,7 +79,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Image.file(File(_image!.path)),
-                  Text('Pipes detected: ${_recognitions?.length ?? 0}'),
+                  Text('Pipes detected: ${_recognitions ?? 0}'),
                 ],
               ),
       ),
